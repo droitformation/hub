@@ -27,7 +27,7 @@ Route::get('oauth/authorize', ['as' => 'oauth.authorize.get','middleware' => ['c
     return view('oauth.authorization-form', ['params'=>$formParams,'client'=>$authParams['client']]);
 }]);
 
-Route::post('oauth/authorize', ['as' => 'oauth.authorize.post','middleware' => ['csrf', 'check-authorization-params', 'auth'], function() {
+Route::post('oauth/authorize', ['as' => 'oauth.authorize.post','middleware' => ['check-authorization-params', 'auth'], function() {
 
     $params = Authorizer::getAuthCodeRequestParams();
     $params['user_id'] = Auth::user()->id;
@@ -51,6 +51,13 @@ Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
 
+Route::get('api/user', ['middleware' => 'oauth', function(){
+
+    $user_id = Authorizer::getResourceOwnerId();
+
+    return Response::json(\App\User::find($user_id));
+
+}]);
 
 
 /* **************************

@@ -33,6 +33,15 @@ return [
             'access_token_ttl' => 3600,
             'auth_token_ttl' => 60
         ]
+
+        /*
+        'password' => [
+            'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
+            'callback' => '\App\Hub\Auth\Verifier@verify',
+            'access_token_ttl' => 3600
+        ]
+        */
+
     ],
 
     /*
