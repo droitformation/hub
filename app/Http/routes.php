@@ -45,6 +45,7 @@ Route::post('oauth/authorize', ['as' => 'oauth.authorize.post','middleware' => [
     }
 
     return Redirect::to($redirectUri);
+
 }]);
 
 Route::post('oauth/access_token', function() {
@@ -54,8 +55,9 @@ Route::post('oauth/access_token', function() {
 Route::get('api/user', ['middleware' => 'oauth', function(){
 
     $user_id = Authorizer::getResourceOwnerId();
+    $user    = \App\User::find($user_id);
 
-    return Response::json(\App\User::find($user_id));
+    return Response::json(['first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->email, 'id' => $user_id]);
 
 }]);
 
