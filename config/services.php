@@ -35,4 +35,9 @@ return [
         'secret' => '',
     ],
 
+    'droithub' => [
+        'client_id'     => '1',
+        'client_secret' => 'droitformation',
+        'redirect'      => 'http://hub.local/login/droithub',
+    ]
 ];
