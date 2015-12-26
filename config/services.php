@@ -38,6 +38,6 @@ return [
     'droithub' => [
         'client_id'     => '1',
         'client_secret' => 'droitformation',
-        'redirect'      => 'http://hub.local/login/droithub',
+        'redirect'      => 'http://hub.local/auth/droithub/callback',
     ]
 ];

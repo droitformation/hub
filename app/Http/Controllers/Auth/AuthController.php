@@ -68,15 +68,35 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(AuthenticateUser $authenticateUser, Request $request, $provider = null)
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
     {
-        return $authenticateUser->execute($request->all(), $this, $provider);
+        return Socialite::driver('droithub')->redirect();
     }
 
-    public function userHasLoggedIn($user)
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
     {
-        \Session::flash('message', 'Welcome, ' . $user->name);
+        $user = Socialite::driver('droithub')->user();
 
+        // stroing data to our use table and logging them in
+        $data = [
+            'first_name' => $user->first_name,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email
+        ];
+
+        \Auth::login(User::firstOrCreate($data));
+
+        //after login redirecting to home page
         return redirect('/');
     }
 }

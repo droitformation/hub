@@ -48,7 +48,7 @@
                                 </div>
                                 @if (!Auth::check())
                                     <div class="btn-group pull-right">
-                                        <a href="{{ url('login/droithub')}}" class="btn btn-info navbar-btn">login par droithub</a>
+                                        <a href="{{ url('auth/droithub')}}" class="btn btn-info navbar-btn">login par droithub</a>
                                     </div>
                                 @endif
                                 @if (Auth::check())

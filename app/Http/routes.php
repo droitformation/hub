@@ -65,7 +65,9 @@ Route::get('api/user', ['middleware' => 'oauth', function(){
 /* **************************
 * Authentication routes...
 * ***************************/
-Route::get('login/{provider?}', 'Auth\AuthController@login');
+
+Route::get('auth/droithub', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/droithub/callback', 'Auth\AuthController@handleProviderCallback');
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
